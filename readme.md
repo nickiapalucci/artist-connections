@@ -43,6 +43,12 @@ Add your postgresql connection to `config.py`
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:xyz@localhost:5432/fyyur'
 ```
 
+### 5. Create the schema for this database
+Use flask migrate with the migrations script in this repository
+```
+flask db upgrade
+```
+
 ## Launch the website
 
 ### 1. Launch flask with `app.py`
