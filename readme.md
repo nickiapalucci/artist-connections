@@ -42,3 +42,14 @@ Add your postgresql connection to `config.py`
 ```
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:xyz@localhost:5432/fyyur'
 ```
+
+## Launch the website
+
+### 1. Launch flask with `app.py`
+```
+FLASK_APP=app.py flask run
+```
+### 2. By default, flask listens to port 5000 locally
+```
+localhost:5000
+```
