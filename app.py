@@ -222,8 +222,11 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  # TODO: insert form data as a new Venue record in the db, instead
-  # TODO: modify data to be the data object returned from db insertion
+  
+  newvenue = Venue(name=request.form['name'], city=request.form['city'], state=request.form['state'],
+    address=request.form['address'], phone=request.form['phone'], genres=request.form['genres'], website=request.form['website'],
+    facebook_link=request.form['facebook_link'], image_link=request.form['image_link'], seeking_talent=request.form['seeking_talent'],
+    seeking_description=request.form['seeking_description'])
 
   # on successful db insert, flash success
   flash('Venue ' + request.form['name'] + ' was successfully listed!')
