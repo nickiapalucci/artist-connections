@@ -227,8 +227,13 @@ def create_venue_submission():
   
   newvenue = Venue(name=request.form['name'], city=request.form['city'], state=request.form['state'],
     address=request.form['address'], phone=request.form['phone'], genres=request.form['genres'], website=request.form['website'],
-    facebook_link=request.form['facebook_link'], image_link=request.form['image_link'], seeking_talent=request.form['seeking_talent'],
+    facebook_link=request.form['facebook_link'], image_link=request.form['image_link'], 
     seeking_description=request.form['seeking_description'])
+  
+  try:
+    newvenue = Venue(seeking_talent=request.form['seeking_talent'])
+  except:
+    newvenue = Venue(seeking_talent=False)
 
   # on successful db insert, flash success
   flash('Venue ' + request.form['name'] + ' was successfully listed!')
