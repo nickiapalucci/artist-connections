@@ -224,16 +224,26 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  
-  newvenue = Venue(name=request.form['name'], city=request.form['city'], state=request.form['state'],
-    address=request.form['address'], phone=request.form['phone'], genres=request.form['genres'], website=request.form['website'],
-    facebook_link=request.form['facebook_link'], image_link=request.form['image_link'], 
-    seeking_description=request.form['seeking_description'])
-  
+  name = request.form['name']
+  city = request.form['city']
+  state = request.form['state']
+  address = request.form['address']
+  phone = request.form['phone']
+  genres = request.form['genres']
+  website = request.form['website']
+  facebook_link = request.form['facebook_link']
+  image_link = request.form['image_link']
+  seeking_description = request.form['seeking_description']
   try:
-    newvenue = Venue(seeking_talent=request.form['seeking_talent'])
+    seeking_talent = request.form['seeking_talent']
   except:
-    newvenue = Venue(seeking_talent=False)
+    seeking_talent=False
+
+  newvenue = Venue(name=name, city=city, state=state, address=address, phone=phone, genres=genres, website=website,
+    facebook_link=facebook_link, image_link=image_link, seeking_talent=seeking_talent, seeking_description=seeking_description)
+  
+  db.session.add(newvenue)
+  db.session.commit()
 
   # on successful db insert, flash success
   flash('Venue ' + request.form['name'] + ' was successfully listed!')
