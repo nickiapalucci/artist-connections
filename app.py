@@ -239,6 +239,9 @@ def create_venue_submission():
   except:
     seeking_talent=False
 
+  if seeking_talent == 'y':
+    seeking_talent = True
+
   newvenue = Venue(name=name, city=city, state=state, address=address, phone=phone, genres=genres, website=website,
     facebook_link=facebook_link, image_link=image_link, seeking_talent=seeking_talent, seeking_description=seeking_description)
   
