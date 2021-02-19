@@ -97,12 +97,14 @@ def venues():
     data.append({
       'city': place.city,
       'state': place.state,
-      'venues': [{
-        'id': venue.id,
-        'name': venue.name,
-      }
-    for venue in venues if
-    venue.city == place.city and venue.state == place.state]
+      'venues': [
+        {
+          'id': venue.id,
+          'name': venue.name,
+        }
+        for venue in venues if
+          venue.city == place.city and venue.state == place.state
+      ]
     })
 
   print(data)
