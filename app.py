@@ -107,7 +107,6 @@ def venues():
       ]
     })
 
-  print(data)
   return render_template('pages/venues.html',areas=data)
 
 @app.route('/venues/search', methods=['POST'])
