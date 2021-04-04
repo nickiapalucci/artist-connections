@@ -135,26 +135,21 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  name = request.form['name']
-  city = request.form['city']
-  state = request.form['state']
-  address = request.form['address']
-  phone = request.form['phone']
-  genres = request.form.getlist('genres')
-  website = request.form['website']
-  facebook_link = request.form['facebook_link']
-  image_link = request.form['image_link']
-  seeking_description = request.form['seeking_description']
-  try:
-    seeking_talent = request.form['seeking_talent']
-  except:
-    seeking_talent=False
-
-  if seeking_talent == 'y':
-    seeking_talent = True
-
-  newvenue = Venue(name=name, city=city, state=state, address=address, phone=phone, genres=genres, website=website,
-    facebook_link=facebook_link, image_link=image_link, seeking_talent=seeking_talent, seeking_description=seeking_description)
+  newvenue = Venue()
+  newvenue.name = request.form['name']
+  newvenue.city = request.form['city']
+  newvenue.state = request.form['state']
+  newvenue.address = request.form['address']
+  newvenue.phone = request.form['phone']
+  newvenue.genres = request.form.getlist('genres')
+  newvenue.website = request.form['website']
+  newvenue.facebook_link = request.form['facebook_link']
+  newvenue.image_link = request.form['image_link']
+  newvenue.seeking_description = request.form['seeking_description']
+  if request.form['seeking_talent'] == 'Yes' :
+    newvenue.seeking_talent = True
+  else :
+    newvenue.seeking_talent = False
   
   try:
     db.session.add(newvenue)
