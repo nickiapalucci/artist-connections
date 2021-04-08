@@ -59,6 +59,7 @@ class Artist(db.Model):
     facebook_link = db.Column(db.String(120))
     seeking_venue = db.Column(db.Boolean())
     seeking_description = db.Column(db.String())
+    website = db.Column(db.String(120))
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 
