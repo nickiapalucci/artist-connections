@@ -71,6 +71,15 @@
 		{% endfor %}
 	</div>
 </section>
+<section>
+	<input class="btn btn-primary btn-lg" style="background-color: red;" type="button" onclick="deletebutton('{{ artist.id }}')" value="Delete This Artist"/>
+	<a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit this Artist</button></a>
+</section>
 
+<script>
+	function deletebutton(artistid){
+		fetch('/artists/' + artistid, {method:'DELETE'})
+	}
+</script>
 {% endblock %}
 

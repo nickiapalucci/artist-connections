@@ -265,6 +265,17 @@ def create_artist_submission():
 
   return render_template('pages/home.html')
 
+@app.route('/artists/<artist_id>', methods=['DELETE'])
+def delete_artist(artist_id):
+  try:
+    deletethis = Artist.query.get(artist_id)
+    db.session.delete(deletethis)
+    db.session.commit()
+  except:
+    db.session.rollback()
+  finally:
+    db.session.close()
+  return render_template('pages/home.html')
 
 #  Shows
 #  ----------------------------------------------------------------
