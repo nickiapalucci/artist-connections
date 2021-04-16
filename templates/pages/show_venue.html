@@ -82,6 +82,7 @@
 <script>
 	function deletebutton(venueid){
 		fetch('/venues/' + venueid, {method:'DELETE'})
+			.then(window.location = "/");
 	}
 </script>
 {% endblock %}

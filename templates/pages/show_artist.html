@@ -79,6 +79,7 @@
 <script>
 	function deletebutton(artistid){
 		fetch('/artists/' + artistid, {method:'DELETE'})
+			.then(window.location = "/");
 	}
 </script>
 {% endblock %}
