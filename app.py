@@ -291,7 +291,7 @@ def delete_artist(artist_id):
 
 @app.route('/shows')
 def shows():
-  shows = Show.query.all()
+  shows = Show.query.filter(Show.start_time > datetime.now()).all()
   for ashow in shows:
     avenue = Venue.query.get(ashow.venue)
     ashow.venue_name = avenue.name
