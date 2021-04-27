@@ -61,7 +61,13 @@ class Artist(db.Model):
     seeking_description = db.Column(db.String())
     website = db.Column(db.String(120))
 
-# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
+class Show(db.Model):
+  __tablename__ = 'Shows'
+
+  id = db.Column(db.Integer, primary_key=True)
+  venue = db.Column(db.Integer, db.ForeignKey('Venue.id'))
+  artist = db.Column(db.Integer, db.ForeignKey('Artist.id'))
+  start_time = db.Column(db.DateTime())
 
 #----------------------------------------------------------------------------#
 # Filters.
