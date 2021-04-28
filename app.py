@@ -75,7 +75,7 @@ class Show(db.Model):
 #----------------------------------------------------------------------------#
 
 def format_datetime(value, format='medium'):
-  value = value.strftime("%y-%m-%dT%H:%M:%S")
+  value = value.strftime("%Y-%m-%dT%H:%M:%S")
   print(value)
   date = dateutil.parser.parse(value)
   if format == 'full':
