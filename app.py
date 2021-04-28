@@ -66,8 +66,8 @@ class Show(db.Model):
   __tablename__ = 'Shows'
 
   id = db.Column(db.Integer, primary_key=True)
-  venue = db.Column(db.Integer, db.ForeignKey('Venue.id'))
-  artist = db.Column(db.Integer, db.ForeignKey('Artist.id'))
+  venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id'))
+  artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'))
   start_time = db.Column(db.DateTime())
 
 #----------------------------------------------------------------------------#
@@ -293,9 +293,9 @@ def delete_artist(artist_id):
 def shows():
   shows = Show.query.filter(Show.start_time > datetime.now()).all()
   for ashow in shows:
-    avenue = Venue.query.get(ashow.venue)
+    avenue = Venue.query.get(ashow.venue_id)
     ashow.venue_name = avenue.name
-    aartist = Artist.query.get(ashow.artist)
+    aartist = Artist.query.get(ashow.artist_id)
     ashow.artist_name = aartist.name
     ashow.artist_image_link = aartist.image_link
   return render_template('pages/shows.html', shows=shows)
@@ -309,8 +309,8 @@ def create_shows():
 @app.route('/shows/create', methods=['POST'])
 def create_show_submission():
   newshow = Show()
-  newshow.artist = request.form['artist_id']
-  newshow.venue = request.form['venue_id']
+  newshow.artist_id = request.form['artist_id']
+  newshow.venue_id = request.form['venue_id']
   newshow.start_time = request.form['start_time']
 
   try:
