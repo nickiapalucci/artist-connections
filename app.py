@@ -145,24 +145,10 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  newvenue = Venue()
-  newvenue.name = request.form['name']
-  newvenue.city = request.form['city']
-  newvenue.state = request.form['state']
-  newvenue.address = request.form['address']
-  newvenue.phone = request.form['phone']
-  newvenue.genres = request.form.getlist('genres')
-  newvenue.website = request.form['website']
-  newvenue.facebook_link = request.form['facebook_link']
-  newvenue.image_link = request.form['image_link']
-  newvenue.seeking_description = request.form['seeking_description']
   try:
-    if request.form['seeking_talent'] == "y" :
-      newvenue.seeking_talent = True
-  except :
-    newvenue.seeking_talent = False
-  
-  try:
+    newvenue = Venue()
+    form = VenueForm(request.form)
+    form.populate_obj(newvenue)
     db.session.add(newvenue)
     db.session.commit()
     flash('Venue ' + request.form['name'] + ' was successfully listed!')
