@@ -156,10 +156,6 @@ def create_venue_submission():
   newvenue.facebook_link = request.form['facebook_link']
   newvenue.image_link = request.form['image_link']
   newvenue.seeking_description = request.form['seeking_description']
-  if request.form['seeking_talent'] == 'Yes' :
-    newvenue.seeking_talent = True
-  else :
-    newvenue.seeking_talent = False
   
   try:
     db.session.add(newvenue)

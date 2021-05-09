@@ -122,11 +122,8 @@ class VenueForm(Form):
     image_link = StringField(
         'image_link', validators=[URL()]
     )
-    seeking_talent = SelectField(
-        choices=[
-            ('Yes','Yes'),
-            ('No', 'No')
-        ]
+    seeking_talent = BooleanField(
+        'seeking_talent'
     )
     seeking_description = StringField(
         'seeking_description'
