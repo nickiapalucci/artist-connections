@@ -168,7 +168,7 @@ def delete_venue(venue_id):
     db.session.rollback()
   finally:
     db.session.close()
-  return None
+  return render_template('pages/home.html')
 
 #  Artists
 #  ----------------------------------------------------------------
@@ -266,7 +266,7 @@ def delete_artist(artist_id):
     db.session.rollback()
   finally:
     db.session.close()
-  return None
+  return render_template('pages/home.html')
 
 #  Shows
 #  ----------------------------------------------------------------
