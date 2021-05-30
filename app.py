@@ -133,6 +133,11 @@ def search_venues():
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
   data = Venue.query.get(venue_id)
+  # bookedartist = Artist.query.filter_by(id = Show.artist_id).subquery()
+  # print(bookedartist)
+  data.upcoming_shows = Show.query\
+    .filter_by(venue_id = venue_id)
+
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue
