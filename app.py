@@ -46,6 +46,7 @@ class Venue(db.Model):
     seeking_description = db.Column(db.String())
     genres = db.Column(db.ARRAY(db.String()))
     website = db.Column(db.String(120))
+    shows = db.relationship('Show', backref='Venue', passive_deletes=True, lazy=True)
 
 class Artist(db.Model):
     __tablename__ = 'Artist'
@@ -61,13 +62,14 @@ class Artist(db.Model):
     seeking_venue = db.Column(db.Boolean())
     seeking_description = db.Column(db.String())
     website = db.Column(db.String(120))
+    shows = db.relationship('Show', backref='Artist', passive_deletes=True, lazy=True)
 
 class Show(db.Model):
   __tablename__ = 'Shows'
 
   id = db.Column(db.Integer, primary_key=True)
-  venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id', ondelete="CASCADE"))
-  artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id', ondelete="CASCADE"))
+  venue_id = db.Column(db.Integer, db.ForeignKey('Venue.id', ondelete="CASCADE"), nullable=False)
+  artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id', ondelete="CASCADE"), nullable=False)
   start_time = db.Column(db.DateTime())
 
 #----------------------------------------------------------------------------#
@@ -133,8 +135,6 @@ def search_venues():
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
   data = Venue.query.get(venue_id)
-  # bookedartist = Artist.query.filter_by(id = Show.artist_id).subquery()
-  # print(bookedartist)
   data.upcoming_shows = Show.query\
     .filter_by(venue_id = venue_id)
 
