@@ -11,6 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
+from flask_wtf.csrf import CSRFProtect
 from forms import *
 from flask_migrate import Migrate
 from datetime import datetime
@@ -22,6 +23,7 @@ app = Flask(__name__)
 moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
+csrf = CSRFProtect(app)
 
 migrate = Migrate(app, db)
 
