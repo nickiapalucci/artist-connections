@@ -8,8 +8,7 @@ Fyyur is a musical venue and artist booking site that facilitates the discovery 
 ## Tech Stack (Dependencies)
 
 ### 1. Backend Dependencies
-Our tech stack will include the following:
- * **git** as our repository and version control
+The tech stack includes the following:
  * **SQLAlchemy ORM** to be our ORM library of choice
  * **PostgreSQL** as our database of choice
  * **Python3** and **Flask** as our server language and server framework
@@ -18,14 +17,14 @@ Our tech stack will include the following:
 ## Setup
 
 ### 1. Local environment
-You can download and install the python3 dependencies mentioned above using `pip` as:
+Download and install the latest versions of these dependencies using `pip`:
 ```
 pip3 install SQLAlchemy
 pip3 install postgres
 pip3 install Flask
 pip3 install Flask-Migrate
 ```
-Install the remaining dependencies using the `requirements.txt`
+Install the remaining dependencies using pip3 and `requirements.txt`
 ```
 sudo pip3 install -r requirements.txt
 ```
@@ -35,12 +34,21 @@ Once this has become a public repository, you can download it here
 https://github.com/nickiapalucci/
 ```
 ### 3. Prepare the database
-Launch a local postgresql server if you do not already have one, then create a new database named `fyyur`
+Launch a local postgresql server if you do not already have one
+```bash
+sudo -u postgres psql
+```
+Create a new database named `fyyur`
+```psql
+ALTER USER postgres PASSWORD ‘YourPassword’;
+
+CREATE DATABASE fyyur;
+```
 
 ### 4. Configure the app to use the datbase
 Add your postgresql connection to `config.py`
 ```
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:xyz@localhost:5432/fyyur'
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:YourPassword@localhost:5432/fyyur'
 ```
 
 ### 5. Create the schema for this database
@@ -55,7 +63,7 @@ flask db upgrade
 ```
 FLASK_APP=app.py flask run
 ```
-### 2. By default, flask listens to port 5000 locally
+### 2. Open the website in a local browser
 ```
 localhost:5000
 ```
