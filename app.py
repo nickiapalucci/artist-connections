@@ -137,10 +137,21 @@ def search_venues():
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
   data = Venue.query.get(venue_id)
-  data.upcoming_shows = db.session.query(Show).join(Venue).join(Artist).filter(
+  upcoming_shows = db.session.query(Artist, Show).join(Venue).join(Artist).filter(
     Show.venue_id == venue_id,
     Show.start_time > datetime.now()
   ).all()
+
+  data.upcoming_shows = [
+      {
+      'artist_id': Artist.id,
+      'artist_name': Artist.name,
+      'artist_image_link': Artist.image_link,
+      'start_time' : Show.start_time
+      }
+    for Artist, Show in upcoming_shows
+  ]
+
   print(data.upcoming_shows)
 
   return render_template('pages/show_venue.html', venue=data)
