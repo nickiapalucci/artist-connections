@@ -80,7 +80,6 @@ class Show(db.Model):
 
 def format_datetime(value, format='medium'):
   value = value.strftime("%Y-%m-%dT%H:%M:%S")
-  print(value)
   date = dateutil.parser.parse(value)
   if format == 'full':
       format="EEEE MMMM, d, y 'at' h:mma"
@@ -151,8 +150,6 @@ def show_venue(venue_id):
       }
     for Artist, Show in upcoming_shows
   ]
-
-  print(data.upcoming_shows)
 
   return render_template('pages/show_venue.html', venue=data)
 
