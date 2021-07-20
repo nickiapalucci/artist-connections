@@ -141,6 +141,11 @@ def show_venue(venue_id):
     Show.start_time > datetime.now()
   ).all()
 
+  past_shows = db.session.query(Artist, Show).join(Venue).join(Artist).filter(
+    Show.venue_id == venue_id,
+    Show.start_time < datetime.now()
+  ).all()
+
   data.upcoming_shows = [
       {
       'artist_id': Artist.id,
@@ -149,6 +154,16 @@ def show_venue(venue_id):
       'start_time' : Show.start_time
       }
     for Artist, Show in upcoming_shows
+  ]
+
+  data.past_shows = [
+      {
+      'artist_id': Artist.id,
+      'artist_name': Artist.name,
+      'artist_image_link': Artist.image_link,
+      'start_time' : Show.start_time
+      }
+    for Artist, Show in past_shows
   ]
 
   return render_template('pages/show_venue.html', venue=data)
