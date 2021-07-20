@@ -137,8 +137,11 @@ def search_venues():
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
   data = Venue.query.get(venue_id)
-  data.upcoming_shows = Show.query\
-    .filter_by(venue_id = venue_id)
+  data.upcoming_shows = db.session.query(Show).join(Venue).join(Artist).filter(
+    Show.venue_id == venue_id,
+    Show.start_time > datetime.now()
+  ).all()
+  print(data.upcoming_shows)
 
   return render_template('pages/show_venue.html', venue=data)
 
