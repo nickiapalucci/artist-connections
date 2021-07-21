@@ -227,7 +227,45 @@ def search_artists():
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
-  return render_template('pages/show_artist.html', artist=Artist.query.get(artist_id))
+  data = Artist.query.get(artist_id)
+
+  upcoming_shows = db.session.query(Venue, Show).join(Artist).join(Venue).filter(
+    Show.artist_id == artist_id,
+    Show.start_time > datetime.now()
+  ).all()
+
+  past_shows = db.session.query(Venue, Show).join(Artist).join(Venue).filter(
+    Show.artist_id == artist_id,
+    Show.start_time < datetime.now()
+  ).all()
+
+  data.upcoming_shows_count = len(upcoming_shows)
+
+  data.upcoming_shows = [
+    {
+      'venue_id': Venue.id,
+      'venue_name': Venue.name,
+      'venue_image_link': Venue.image_link,
+      'start_time': Show.start_time
+    }
+    for Venue, Show in upcoming_shows
+  ]
+
+  data.past_shows_count = len(past_shows)
+
+  data.past_shows = [
+    {
+      'venue_id': Venue.id,
+      'venue_name': Venue.name,
+      'venue_image_link': Venue.image_link,
+      'start_time': Show.start_time
+    }
+    for Venue, Show in past_shows
+  ]
+
+  data.past_shows_count = len(past_shows)
+
+  return render_template('pages/show_artist.html', artist=data)
 
 #  Update
 #  ----------------------------------------------------------------
