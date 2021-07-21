@@ -136,6 +136,7 @@ def search_venues():
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
   data = Venue.query.get(venue_id)
+
   upcoming_shows = db.session.query(Artist, Show).join(Venue).join(Artist).filter(
     Show.venue_id == venue_id,
     Show.start_time > datetime.now()
@@ -147,24 +148,24 @@ def show_venue(venue_id):
   ).all()
 
   data.upcoming_shows = [
-      {
+    {
       'artist_id': Artist.id,
       'artist_name': Artist.name,
       'artist_image_link': Artist.image_link,
       'start_time' : Show.start_time
-      }
+    }
     for Artist, Show in upcoming_shows
   ]
 
   data.upcoming_shows_count = len(upcoming_shows)
 
   data.past_shows = [
-      {
+    {
       'artist_id': Artist.id,
       'artist_name': Artist.name,
       'artist_image_link': Artist.image_link,
       'start_time' : Show.start_time
-      }
+    }
     for Artist, Show in past_shows
   ]
 
