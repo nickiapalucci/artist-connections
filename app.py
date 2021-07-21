@@ -156,6 +156,8 @@ def show_venue(venue_id):
     for Artist, Show in upcoming_shows
   ]
 
+  data.upcoming_shows_count = len(upcoming_shows)
+
   data.past_shows = [
       {
       'artist_id': Artist.id,
@@ -165,6 +167,8 @@ def show_venue(venue_id):
       }
     for Artist, Show in past_shows
   ]
+
+  data.past_shows_count = len(past_shows)
 
   return render_template('pages/show_venue.html', venue=data)
 
