@@ -135,6 +135,7 @@ def search_venues():
 
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
+  form = VenueForm()
   data = Venue.query.get(venue_id)
 
   upcoming_shows = db.session.query(Artist, Show).join(Venue).join(Artist).filter(
@@ -171,7 +172,7 @@ def show_venue(venue_id):
 
   data.past_shows_count = len(past_shows)
 
-  return render_template('pages/show_venue.html', venue=data)
+  return render_template('pages/show_venue.html', venue=data, form=form)
 
 #  Create Venue
 #  ----------------------------------------------------------------
@@ -196,7 +197,7 @@ def create_venue_submission():
 
   return render_template('pages/home.html')
 
-@app.route('/venues/<venue_id>', methods=['DELETE'])
+@app.route('/venues/<venue_id>/delete', methods=['POST'])
 def delete_venue(venue_id):
   try:
     deletethis = Venue.query.get(venue_id)
