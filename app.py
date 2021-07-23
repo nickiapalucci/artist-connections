@@ -229,6 +229,7 @@ def search_artists():
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
+  form = VenueForm()
   data = Artist.query.get(artist_id)
 
   upcoming_shows = db.session.query(Venue, Show).join(Artist).join(Venue).filter(
@@ -267,7 +268,7 @@ def show_artist(artist_id):
 
   data.past_shows_count = len(past_shows)
 
-  return render_template('pages/show_artist.html', artist=data)
+  return render_template('pages/show_artist.html', artist=data, form=form)
 
 #  Update
 #  ----------------------------------------------------------------
@@ -333,7 +334,7 @@ def create_artist_submission():
 
   return render_template('pages/home.html')
 
-@app.route('/artists/<artist_id>', methods=['DELETE'])
+@app.route('/artists/<artist_id>/delete', methods=['POST'])
 def delete_artist(artist_id):
   try:
     deletethis = Artist.query.get(artist_id)

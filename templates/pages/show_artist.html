@@ -72,15 +72,20 @@
 	</div>
 </section>
 <section>
-	<input class="btn btn-primary btn-lg" style="background-color: red;" type="button" onclick="deletebutton('{{ artist.id }}')" value="Delete This Artist"/>
 	<a href="/artists/{{ artist.id }}/edit"><button class="btn btn-primary btn-lg">Edit this Artist</button></a>
+	<p></p>
+	<div class="form-wrapper">
+		<form method="post" class="form">
+			{{ form.csrf_token }}
+			<input type="submit"
+				value="Delete this Artist"
+				class="btn btn-primary btn-lg"
+				formaction="{{ url_for('delete_artist', artist_id=artist.id) }}"
+				style="background-color: red;"
+			/>
+		</form>
+	</div>
 </section>
 
-<script>
-	function deletebutton(artistid){
-		fetch('/artists/' + artistid, {method:'DELETE'})
-			.then(function() {window.location = "/"});
-	}
-</script>
 {% endblock %}
 
