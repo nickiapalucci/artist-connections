@@ -24,6 +24,7 @@ moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
+csrf.init_app(app)
 
 migrate = Migrate(app, db)
 
