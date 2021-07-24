@@ -201,8 +201,10 @@ def delete_venue(venue_id):
     deletethis = Venue.query.get(venue_id)
     db.session.delete(deletethis)
     db.session.commit()
+    flash('Venue was successfully deleted!')
   except:
     db.session.rollback()
+    flash('An error occurred: Venue could not deleted.')
   finally:
     db.session.close()
   return render_template('pages/home.html')
@@ -337,8 +339,10 @@ def delete_artist(artist_id):
     deletethis = Artist.query.get(artist_id)
     db.session.delete(deletethis)
     db.session.commit()
+    flash('Artist was successfully deleted!')
   except:
     db.session.rollback()
+    flash('An error occurred: Artist could not deleted.')
   finally:
     db.session.close()
   return render_template('pages/home.html')
