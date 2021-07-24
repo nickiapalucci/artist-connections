@@ -134,7 +134,6 @@ def search_venues():
 
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
-  form = VenueForm()
   data = Venue.query.get(venue_id)
 
   upcoming_shows = db.session.query(Artist, Show).join(Venue).join(Artist).filter(
@@ -171,7 +170,7 @@ def show_venue(venue_id):
 
   data.past_shows_count = len(past_shows)
 
-  return render_template('pages/show_venue.html', venue=data, form=form)
+  return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue
 #  ----------------------------------------------------------------
@@ -228,7 +227,6 @@ def search_artists():
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
-  form = VenueForm()
   data = Artist.query.get(artist_id)
 
   upcoming_shows = db.session.query(Venue, Show).join(Artist).join(Venue).filter(
@@ -267,7 +265,7 @@ def show_artist(artist_id):
 
   data.past_shows_count = len(past_shows)
 
-  return render_template('pages/show_artist.html', artist=data, form=form)
+  return render_template('pages/show_artist.html', artist=data)
 
 #  Update
 #  ----------------------------------------------------------------
