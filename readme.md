@@ -5,14 +5,14 @@ Fyyur
 
 Fyyur is a musical venue and artist booking site that facilitates the discovery and bookings of shows between local performing artists and venues. This site lets you list new artists and venues, discover them, and list shows with artists as a venue owner.
 
-## Setup guide for single machine deployment with Ubuntu
+## Setup guide for single machine deployment with Ubuntu 20.04 LTS
 
 ### 1. Download the repository
 ```
 git clone https://github.com/nickiapalucci/fyyurnniapalucci.git
 ```
 ### 2. Prepare the local environment
-Download and install the latest versions of these dependencies using `pip`:
+Download and install the latest versions of these dependencies using `pip3`:
 ```
 pip3 install SQLAlchemy
 pip3 install postgres
@@ -21,7 +21,7 @@ pip3 install Flask-Migrate
 ```
 Install the remaining dependencies using pip3 and `requirements.txt`
 ```
-sudo pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 ### 3. Prepare the database
 Launch a local postgresql server if you do not already have one
@@ -39,10 +39,15 @@ ALTER USER postgres PASSWORD ‘YourPassword’;
 CREATE DATABASE fyyur;
 ```
 
-### 4. Configure the database connection
-Add this line to `config.py`
+### 4. Create a local configuration file
+In the same root directory as app.py, create a new file named `config.py` with the following code
+<BR>
+Add your postgres password
 ```python
+import os
+
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:YourPassword@localhost:5432/fyyur'
+SECRET_KEY = os.urandom(32)
 ```
 ### 5. Create the schema for this database
 Use flask migrate with the migrations script in this repository
