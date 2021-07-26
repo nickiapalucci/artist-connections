@@ -46,7 +46,7 @@ def fill_database(quantity=10):
     new_artist = app.Artist()
     newshow = app.Show()
     
-    for x in quantity:
+    for x in range(quantity):
         new_venue.name = random_string()
         new_venue.genres = genres_filler()
         new_venue.address = random_string()
@@ -61,7 +61,7 @@ def fill_database(quantity=10):
         db.session.add(new_venue)
         db.session.commit()
     
-    for x in quantity:
+    for x in range(quantity):
         new_artist.name = random_string()
         new_artist.genres = genres_filler()
         new_artist.city = random_string()
@@ -75,7 +75,7 @@ def fill_database(quantity=10):
         db.session.add(new_artist)
         db.session.commit()
     
-    for x in quantity / 4:
+    for x in range(quantity / 4):
         newshow.venue_id = random.randrange(quantity - 1)
         newshow.artist_id = random.randrange(quantity - 1)
         newshow.start_time = datetime.now() + timedelta(days=random.randrange(3))
