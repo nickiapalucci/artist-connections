@@ -41,13 +41,32 @@ def genres_filler():
 
     return unique_genres_list
 
+def tx_city_filler():
+    tx_city_list = [
+        "Amarillo",
+        "Claude",
+        "Clarendon",
+        "Hedley",
+        "Memphis",
+        "Estelline",
+        "Childress",
+        "Quanah",
+        "Chillicothe",
+        "Vernon",
+        "Electra",
+        "Iowa Park",
+        "Witchita Falls"
+    ]
+
+    return random.choice(tx_city_list)
+
 def fill_database(quantity=10):
     for x in range(quantity):
         new_venue = Venue()
         new_venue.name = random_string()
         new_venue.genres = genres_filler()
         new_venue.address = random_string()
-        new_venue.city = random_string()
+        new_venue.city = tx_city_filler()
         new_venue.state = "TX"
         new_venue.phone = 972-123-4567
         new_venue.website = "https://www.udacity.com"
@@ -62,7 +81,7 @@ def fill_database(quantity=10):
         new_artist = Artist()
         new_artist.name = random_string()
         new_artist.genres = genres_filler()
-        new_artist.city = random_string()
+        new_artist.city = tx_city_filler()
         new_artist.state = "TX"
         new_artist.phone = 972-123-4567
         new_artist.website = "https://www.udacity.com"
