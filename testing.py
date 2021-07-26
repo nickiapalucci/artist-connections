@@ -60,7 +60,7 @@ def tx_city_filler():
 
     return random.choice(tx_city_list)
 
-def fill_database(quantity=10):
+def fill_database(quantity=1):
     for x in range(quantity):
         new_venue = Venue()
         new_venue.name = random_string()
@@ -92,7 +92,7 @@ def fill_database(quantity=10):
         db.session.add(new_artist)
         db.session.commit()
     
-    for x in range(int(quantity / 2)):
+    for x in range(int(quantity)):
         newshow = Show()
         venue_id_list = [i[0] for i in db.session.query(Venue.id).all()]
         artist_id_list = [i[0] for i in db.session.query(Artist.id).all()]

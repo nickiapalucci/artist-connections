@@ -1,4 +1,4 @@
-Fyyur
+# Fyyur
 -----
 
 ## Introduction
@@ -64,6 +64,18 @@ FLASK_APP=app.py flask run
 ```http
 localhost:5000
 ```
+
+## Testing
+### 1. In the same root directory as app.py, run the fill_database function in `testing.py`
+To create (1) new Venue, Artist, and a Show
+```
+python3 -c 'import testing; testing.fill_database()'
+```
+To create multiple new records, add an int to the function
+```
+python3 -c 'import testing; testing.fill_database(5)'
+```
+
 ## Tech Stack (Dependencies)
 
 ### 1. Backend Dependencies
