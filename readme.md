@@ -60,21 +60,13 @@ CREATE DATABASE fyyur;
 exit
 ```
 
-## 4. Create a local configuration file
+## 4. Update the local configuration file
 
-In the same root directory as app.py, open a text editor and create a new file named `config.py` with the following code and the new password
-
-##### config.py
-```
-import os
-
-SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:YourPassword@localhost:5432/fyyur'
-SECRET_KEY = os.urandom(32)
-```
+In the same root directory as app.py, open `config.py` and update the database connection and password if necessary.
 
 ## 5. Create the schema for the fyyur database
 
-Use flask migrate with the included the migration script in this repository
+Use flask migrate with the included migration script in this repository
 
 ##### bash
 ```
