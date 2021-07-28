@@ -53,7 +53,7 @@ Create a password for `postgres` and create a new database named `fyyur` which w
 
 ##### psql
 ```
-ALTER USER postgres PASSWORD ‘YourPassword’;
+ALTER ROLE postgres WITH PASSWORD 'YourPassword';
 
 CREATE DATABASE fyyur;
 
